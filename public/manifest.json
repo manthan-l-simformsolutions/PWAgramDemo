@@ -1,5 +1,6 @@
 {
   "name": "Instagram as Progressive Web App",
+  "id": "/index.html",
   "short_name": "PWAGram",
   "icons": [
     {
@@ -36,6 +37,20 @@
       "src": "/src/images/icons/app-icon-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/src/images/icons/app-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/src/images/icons/app-icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "form_factor": "narrow"
     }
   ],
   "start_url": "/index.html",
