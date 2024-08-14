@@ -24,4 +24,7 @@ The manifest.json file is required for the Progressive Web App to work. It conta
 - Activating the service worker
 - Handling the fetch event
 
+# Service worker:- caching
 
+- Cache static assets in the service worker
+- Cache dynamic assets in the service worker
