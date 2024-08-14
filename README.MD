@@ -17,3 +17,11 @@ The manifest.json file is required for the Progressive Web App to work. It conta
 - How to configure the manifest.json file for chrome
 - Adding Properties for Safari
 - Adding Properties for the Internet Explorer
+
+# Add service worker ( sw.js )
+
+- Installing the service worker
+- Activating the service worker
+- Handling the fetch event
+
+
