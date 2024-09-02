@@ -28,3 +28,13 @@ The manifest.json file is required for the Progressive Web App to work. It conta
 
 - Cache static assets in the service worker
 - Cache dynamic assets in the service worker
+
+# Service Workers - Advanced Caching
+
+- Offering "Cache on Demand"
+- Providing an Offline Fallback Page
+- Strategy: Cache with Network Fallback
+- Strategy: Cache Only
+- Strategy: Network Only
+- Strategy: Network with Cache Fallback
+- Strategy: Cache then Network
