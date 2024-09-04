@@ -48,3 +48,9 @@ The manifest.json file is required for the Progressive Web App to work. It conta
 - Storing Fetched Posts in IndexedDB
 - Reading Data from IDB
 - Deleting Single Items from the Database
+
+# Creating a Responsive User Interface (UI)
+
+- Understanding Responsive Design in our Project
+- CSS and Media Queries
+- Adding Animations
