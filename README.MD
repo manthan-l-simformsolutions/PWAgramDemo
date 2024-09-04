@@ -38,3 +38,13 @@ The manifest.json file is required for the Progressive Web App to work. It conta
 - Strategy: Network Only
 - Strategy: Network with Cache Fallback
 - Strategy: Cache then Network
+
+# IndexedDB and Dynamic Data
+
+- Understanding the Basics
+- Setting Up Firebase
+- Dynamic Caching vs. Caching Dynamic Content
+- Introducing IndexedDB
+- Storing Fetched Posts in IndexedDB
+- Reading Data from IDB
+- Deleting Single Items from the Database
