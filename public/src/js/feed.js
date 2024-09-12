@@ -4,6 +4,9 @@ var closeCreatePostModalButton = document.querySelector(
   "#close-create-post-modal-btn"
 );
 var sharedMomentsArea = document.querySelector("#shared-moments");
+var form = document.querySelector("form");
+var titleInput = document.querySelector("#title");
+var locationInput = document.querySelector("#location");
 
 function openCreatePostModal() {
   // createPostArea.style.display = 'block';
@@ -120,3 +123,58 @@ if ("indexedDB" in window) {
     }
   });
 }
+
+function sendData() {
+  fetch("https://pwa-demo-ae111-default-rtdb.firebaseio.com/posts.json", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      id: new Date().toISOString(),
+      title: titleInput.value,
+      location: locationInput.value,
+      image:
+        "https://firebasestorage.googleapis.com/v0/b/pwa-demo-ae111.appspot.com/o/sf-boat.jpg?alt=media&token=a05b5d5f-404e-40a3-96ff-935fd7d65a69",
+    }),
+  }).then(function (res) {
+    console.log("Sent data", res);
+    updateUI();
+  });
+}
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  if (titleInput.value.trim() === "" || locationInput.value.trim() === "") {
+    alert("Please enter valid data!");
+    return;
+  }
+
+  closeCreatePostModal();
+
+  if ("serviceWorker" in navigator && "SyncManager" in window) {
+    navigator.serviceWorker.ready.then(function (sw) {
+      var post = {
+        id: new Date().toISOString(),
+        title: titleInput.value,
+        location: locationInput.value,
+      };
+      writeData("sync-posts", post)
+        .then(function () {
+          return sw.sync.register("sync-new-posts");
+        })
+        .then(function () {
+          var snackbarContainer = document.querySelector("#confirmation-toast");
+          var data = { message: "Your Post was saved for syncing!" };
+          snackbarContainer.MaterialSnackbar.showSnackbar(data);
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    });
+  } else {
+    sendData();
+  }
+});

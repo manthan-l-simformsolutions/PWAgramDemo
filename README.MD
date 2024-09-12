@@ -54,3 +54,10 @@ The manifest.json file is required for the Progressive Web App to work. It conta
 - Understanding Responsive Design in our Project
 - CSS and Media Queries
 - Adding Animations
+
+# Background Sync
+
+- How does Background Sync Work?
+- Registering a Synchronization Task
+- Storing our Post in IndexedDB
+- Syncing Data in the Service Worker

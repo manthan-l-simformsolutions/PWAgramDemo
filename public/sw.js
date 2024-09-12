@@ -1,8 +1,8 @@
 importScripts("/src/js/idb.js");
 importScripts("/src/js/utility.js");
 
-var CACHE_STATIC_NAME = "static-v22";
-var CACHE_DYNAMIC_NAME = "dynamic-v2";
+var CACHE_STATIC_NAME = "static-v25";
+var CACHE_DYNAMIC_NAME = "dynamic-v6";
 var STATIC_FILES = [
   "/",
   "/index.html",
@@ -175,3 +175,42 @@ self.addEventListener("fetch", function (event) {
 //     fetch(event.request)
 //   );
 // });
+
+self.addEventListener("sync", function (event) {
+  console.log("[Service Worker] Background syncing", event);
+  if (event.tag === "sync-new-posts") {
+    console.log("[Service Worker] Syncing new Posts");
+    event.waitUntil(
+      readAllData("sync-posts").then(function (data) {
+        for (var dt of data) {
+          fetch(
+            "https://pwa-demo-ae111-default-rtdb.firebaseio.com/posts.json",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+              },
+              body: JSON.stringify({
+                id: dt.id,
+                title: dt.title,
+                location: dt.location,
+                image:
+                  "https://firebasestorage.googleapis.com/v0/b/pwa-demo-ae111.appspot.com/o/sf-boat.jpg?alt=media&token=a05b5d5f-404e-40a3-96ff-935fd7d65a69",
+              }),
+            }
+          )
+            .then(function (res) {
+              console.log("Sent data", res);
+              if (res.ok) {
+                deleteItemFromData("sync-posts", dt.id); // Isn't working correctly!
+              }
+            })
+            .catch(function (err) {
+              console.log("Error while sending data", err);
+            });
+        }
+      })
+    );
+  }
+});
