@@ -1,8 +1,8 @@
 importScripts("/src/js/idb.js");
 importScripts("/src/js/utility.js");
 
-var CACHE_STATIC_NAME = "static-v25";
-var CACHE_DYNAMIC_NAME = "dynamic-v6";
+var CACHE_STATIC_NAME = "static-v27";
+var CACHE_DYNAMIC_NAME = "dynamic-v8";
 var STATIC_FILES = [
   "/",
   "/index.html",
@@ -204,6 +204,9 @@ self.addEventListener("sync", function (event) {
               console.log("Sent data", res);
               if (res.ok) {
                 deleteItemFromData("sync-posts", dt.id); // Isn't working correctly!
+                self.registration.showNotification("Post Synced!", {
+                  body: "Your new post was synced successfully.",
+                });
               }
             })
             .catch(function (err) {

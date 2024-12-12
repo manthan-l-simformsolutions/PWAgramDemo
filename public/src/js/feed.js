@@ -39,6 +39,23 @@ function openCreatePostModal() {
   // }
 }
 
+function updateOnlineStatus() {
+  if (navigator.onLine) {
+    var snackbarContainer = document.querySelector("#confirmation-toast");
+    var data = { message: "You are Online ✅" };
+    snackbarContainer.MaterialSnackbar?.showSnackbar(data);
+  } else {
+    var snackbarContainer = document.querySelector("#confirmation-toast");
+    var data = { message: "You are Offline ❌" };
+    snackbarContainer.MaterialSnackbar?.showSnackbar(data);
+  }
+}
+
+window.addEventListener("online", updateOnlineStatus);
+window.addEventListener("offline", updateOnlineStatus);
+
+updateOnlineStatus();
+
 function closeCreatePostModal() {
   createPostArea.style.transform = "translateY(100vh)";
   // createPostArea.style.display = 'none';
@@ -178,3 +195,9 @@ form.addEventListener("submit", function (event) {
     sendData();
   }
 });
+
+if ("Notification" in window) {
+  Notification.requestPermission(function (status) {
+    console.log("Notification permission status:", status);
+  });
+}
